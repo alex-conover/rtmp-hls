@@ -27,3 +27,5 @@ services:
       - shared_www:/www
     command: certonly --webroot -w /www -d conoverlabs.cloud   # Replace with your domain
 
+volumes:
+  shared_www:  # Define the named volume
