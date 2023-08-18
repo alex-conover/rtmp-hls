@@ -16,13 +16,13 @@ services:
     image: certbot/certbot
     volumes:
       - ./certs:/etc/letsencrypt
-    command: certonly --webroot -w /var/www/certbot -d yourdomain.com -d www.yourdomain.com
-
+    command: certonly --webroot --webroot-path=/var/www/certbot --email alex.conover@outlook.com --agree-tos --no-eff-email -d conoverlabs.cloud
+  
   auth-service:
     build:
       context: ./auth-service  # Path to your Python authentication service code
     ports:
-      - "80:80"  # Expose the authentication service on port 80
+      - "8181:8181"  # Expose the authentication service on port 8181
 
 volumes:
   certs:
