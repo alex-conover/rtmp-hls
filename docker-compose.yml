@@ -9,9 +9,9 @@ services:
     container_name: rtmp_server
     volumes:
       - ./data:/tmp/hls
-      - /etc/letsencrypt:/etc/letsencrypt:ro   # Mount Certbot data
-    depends_on:
-      - certbot
+      # - /etc/letsencrypt:/etc/letsencrypt:ro   # Mount Certbot data
+    # depends_on:
+    #   - certbot
 
 
   auth:
