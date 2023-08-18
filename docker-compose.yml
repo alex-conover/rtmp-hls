@@ -9,6 +9,7 @@ services:
     container_name: rtmp_server
     volumes:
       - ./data:/tmp/hls
+      - shared_www:/www
       # - /etc/letsencrypt:/etc/letsencrypt:ro   # Mount Certbot data
     # depends_on:
     #   - certbot
@@ -23,5 +24,6 @@ services:
     volumes:
       - ./certbot/data:/etc/letsencrypt
       - ./certbot/logs:/var/log/letsencrypt
+      - shared_www:/www
     command: certonly --webroot -w /www -d conoverlabs.cloud   # Replace with your domain
 
