@@ -25,7 +25,7 @@ services:
       - ./certbot/data:/etc/letsencrypt
       - ./certbot/logs:/var/log/letsencrypt
       - shared_www:/www
-    command: certonly --webroot -w /www -d conoverlabs.cloud   # Replace with your domain
+    command: certonly --webroot -w /www -d conoverlabs.cloud --email alex.conover@outlook.com
 
 volumes:
   shared_www:  # Define the named volume
