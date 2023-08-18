@@ -2,7 +2,9 @@ version: '3'
 
 services:
   nginx-rtmp:
-    image: tiangolo/nginx-rtmp
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "1935:1935"  # RTMP port
       - "80:80"      # HTTP port
@@ -16,7 +18,7 @@ services:
     image: certbot/certbot
     volumes:
       - ./certs:/etc/letsencrypt
-    command: certonly --webroot --webroot-path=/var/www/certbot --email alex.conover@outlook.com --agree-tos --no-eff-email -d conoverlabs.cloud
+    command: certonly --standalone --email alex.conover@outlook.com --agree-tos --no-eff-email -d conoverlabs.cloud
   
   auth-service:
     build:
