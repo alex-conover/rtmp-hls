@@ -1,0 +1,27 @@
+version: "3.3"
+services:
+  rtmp:
+    build: ./rtmp
+    ports:
+      - "1935:1935"
+      - "80:8080"
+      - "443:8443"   # Add a mapping for SSL traffic
+    container_name: rtmp_server
+    volumes:
+      - ./data:/tmp/hls
+      - /etc/letsencrypt:/etc/letsencrypt:ro   # Mount Certbot data
+    depends_on:
+      - certbot
+
+
+  auth:
+    build: ./auth
+    container_name: auth_server
+
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - ./certbot/data:/etc/letsencrypt
+      - ./certbot/logs:/var/log/letsencrypt
+    command: certonly --webroot -w /www -d conoverlabs.cloud   # Replace with your domain
+
