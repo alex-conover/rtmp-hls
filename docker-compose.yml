@@ -10,9 +10,9 @@ services:
     volumes:
       - ./data:/tmp/hls
       - shared_www:/www
-      # - /etc/letsencrypt:/etc/letsencrypt:ro   # Mount Certbot data
-    # depends_on:
-    #   - certbot
+      - /etc/letsencrypt:/etc/letsencrypt:ro   # Mount Certbot data
+    depends_on:
+      - certbot
 
 
   auth:
