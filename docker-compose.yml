@@ -10,6 +10,7 @@ services:
     volumes:
       - ./data:/tmp/hls
       - ./certbot:/tmp/ssl # Share the volume with your Certbot container
+      - ./www:/www
     depends_on:
       - certbot
 
@@ -19,10 +20,10 @@ services:
 
   certbot:
     image: certbot/certbot
-    ports:
-      - "80:80"
-      - "443:443"
+    container_name: certbot
     volumes:
       - ./certbot:/tmp/ssl # Share the volume with your Nginx container
-    container_name: certbot
-    command: certonly --webroot --webroot-path=/www --agree-tos --email alex.conover@outlook.com -d conoverlabs.cloud
+      - ./www:/www
+    depends_on:
+      - rtmp
+    command: certonly --webroot -w /www --agree-tos --email alex.conover@outlook.com -d conoverlabs.cloud
