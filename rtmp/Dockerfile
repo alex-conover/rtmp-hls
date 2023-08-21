@@ -7,7 +7,7 @@ COPY index.html /www/
 FROM certbot/certbot
 
 # Replace 'example.com' with your domain(s)
-RUN apt-get update
+RUN apt update
 RUN apt-get install certbot -y
 RUN apt-get install python3-certbot-nginx
 RUN certbot --nginx --email alex.conover@salesforce.com -d conoverlabs.cloud
