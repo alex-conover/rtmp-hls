@@ -1,18 +1,15 @@
-version: '3'
+version: "3.3"
 services:
-  nginx-rtmp:
-    image: tiangolo/nginx-rtmp:latest
+  rtmp:
+    build: ./rtmp
     ports:
-      - "1935:1935" # RTMP port
-      - "80:80"     # HTTP port
-      - "443:443"   # HTTPS port
+      - "1935:1935"
+      - "80:8080"
+      - "443:8080"
+    container_name: rtmp_server
     volumes:
-      - ./data:/data # Persistent data for Let's Encrypt
-    environment:
-      - STREAM_KEY=your_stream_key_here # Change this to your desired stream key
+      - ./data:/tmp/hls
 
-  certbot:
-    image: certbot/certbot
-    volumes:
-      - ./data:/etc/letsencrypt
-    command: certonly --standalone --agree-tos --non-interactive --email alex.conover@salesforce.com -d conoverlabs.cloud
+  auth:
+    build: ./auth
+    container_name: auth_server
