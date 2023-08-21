@@ -9,6 +9,7 @@ services:
     container_name: rtmp_server
     volumes:
       - ./data:/tmp/hls
+      - ./keys:/etc/letsencrypt/live/conoverlabs.cloud/
 
   auth:
     build: ./auth
