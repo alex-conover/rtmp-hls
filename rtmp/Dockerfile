@@ -7,10 +7,10 @@ COPY index.html /www/
 FROM certbot/certbot
 
 # Replace 'example.com' with your domain(s)
-RUN apt-get update && \
-    apt-get install -y certbot && \
-    apt-get install -y python3-certbot-nginx && \
-    certbot --nginx --email alex.conover@salesforce.com -d conoverlabs.cloud
+RUN apt-get update
+RUN apt-get install certbot -y
+RUN apt-get install python3-certbot-nginx
+RUN certbot --nginx --email alex.conover@salesforce.com -d conoverlabs.cloud
 
 # Stage 3: Copy SSL Certificates to NGINX-RTMP container
 FROM nginx-rtmp
