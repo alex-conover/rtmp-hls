@@ -11,14 +11,14 @@ services:
       - "443:443"    # HTTPS port
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
-      - ./certs:/etc/letsencrypt
       - ./hls:/tmp/hls
+      # - ./certs:/etc/letsencrypt
 
-  certbot:
-    image: certbot/certbot
-    volumes:
-      - ./certs:/etc/letsencrypt
-    command: certonly --standalone --email alex.conover@outlook.com --agree-tos --no-eff-email -d conoverlabs.cloud
+  # certbot:
+  #   image: certbot/certbot
+  #   volumes:
+  #     - ./certs:/etc/letsencrypt
+  #   command: certonly --standalone --email alex.conover@outlook.com --agree-tos --no-eff-email -d conoverlabs.cloud
   
   auth-service:
     build:
@@ -27,5 +27,6 @@ services:
       - "8181:8181"  # Expose the authentication service on port 8181
 
 volumes:
-  certs:
   hls:
+  # certs:
+

@@ -1,14 +1,10 @@
 FROM tiangolo/nginx-rtmp
 
 # Install Certbot and other required packages
-RUN apt-get update && apt-get install -y certbot python3-certbot-nginx
-
-# Set environment variables
-ENV EMAIL=alex.conover@outlook.com
-ENV DOMAIN=conoverlabs.cloud
+RUN apt update && apt-get install certbot -y python3-certbot-nginx
 
 # Copy Nginx configuration
-COPY nginx.conf /etc/nginx/nginx.conf
+# COPY nginx.conf /etc/nginx/nginx.conf
 
 # Run Certbot command on container startup
-CMD certbot certonly --standalone --email $EMAIL --agree-tos --no-eff-email -d $DOMAIN && nginx -g "daemon off;"
+CMD certbot --nginx --email alex.conover@outlook.com --agree-tos --no-eff-email -d conoverlabs.cloud && nginx -g "daemon off;"
