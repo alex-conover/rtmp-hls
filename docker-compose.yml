@@ -9,8 +9,14 @@ services:
     container_name: rtmp_server
     volumes:
       - ./data:/tmp/hls
-      - ./keys:/etc/letsencrypt/live/conoverlabs.cloud/
+      - ./certbot:/tmp/ssl # Share the volume with your Certbot container
 
   auth:
     build: ./auth
     container_name: auth_server
+
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - ./certbot:/tmp/ssl # Share the volume with your Nginx container
+    command: certonly --webroot --webroot-path=/tmp/ssl --agree-tos --email alex.conover@outlook.com -d conoverlabs.cloud

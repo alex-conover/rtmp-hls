@@ -5,8 +5,8 @@ COPY index.html /www/
 
 #Get SSL Certificates using Certbot
 
-# RUN sudo apt update
-# RUN sudo apt install snapd
+# RUN apt update
+# RUN apt install snapd
 # RUN apt-get install python3-certbot-nginx
 # RUN certbot --nginx --email alex.conover@salesforce.com -d conoverlabs.cloud
 
