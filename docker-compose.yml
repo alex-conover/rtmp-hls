@@ -1,4 +1,4 @@
-version: "3.3"
+version: "3.4"
 services:
   rtmp:
     build: ./rtmp
@@ -9,8 +9,8 @@ services:
     container_name: rtmp_server
     volumes:
       - ./data:/tmp/hls
-      - ./certbot:/tmp/ssl # Share the volume with your Certbot container
-      - ./www:/www
+      - ./certbot/conf:/ect/nginx/ssl
+      - ./certbot/data:/usr/share/nginx/html/letsencrypt
     depends_on:
       - certbot
 
@@ -22,8 +22,7 @@ services:
     image: certbot/certbot
     container_name: certbot
     volumes:
-      - ./certbot:/tmp/ssl # Share the volume with your Nginx container
-      - ./www:/www
-    depends_on:
-      - rtmp
-    command: certonly --webroot -w /www --agree-tos --email alex.conover@outlook.com -d conoverlabs.cloud
+      - ./certbot/conf:/ect/nginx/ssl
+      - ./certbot/logs:/var/log/letsencrypt
+      - ./certbot/data:/usr/share/nginx/html/letsencrypt
+    command: certonly --webroot --webroot-path=/usr/share/nginx/html/letsencrypt --agree-tos --email alex.conover@outlook.com -d conoverlabs.cloud

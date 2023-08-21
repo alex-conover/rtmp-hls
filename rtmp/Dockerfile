@@ -1,7 +1,7 @@
 FROM tiangolo/nginx-rtmp
 
 COPY nginx.conf /etc/nginx/nginx.conf
-COPY index.html /www/
+COPY index.html /public_html/
 
 #Get SSL Certificates using Certbot
 
